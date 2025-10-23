@@ -6,9 +6,9 @@ services:
     region: frankfurt
     buildCommand: |
       npm install
-      npm install @nestjs/cli -D
-      npx nest build
-    startCommand: npm run start:prod
+      npm install @nestjs/cli -g
+      nest build
+    startCommand: node dist/main.js
     envVars:
       - key: NODE_ENV
         value: production
