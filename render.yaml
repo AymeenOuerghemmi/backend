@@ -1,12 +1,13 @@
 services:
   - type: web
-    name: backend
+    name: instaclinic-backend
     env: node
     plan: free
-    region: frankfurt  # 🇪🇺 Europe pour meilleure latence avec Neon
+    region: frankfurt
     buildCommand: |
       npm install
-      npm run build
+      npm install @nestjs/cli -D
+      npx nest build
     startCommand: npm run start:prod
     envVars:
       - key: NODE_ENV
@@ -14,5 +15,5 @@ services:
       - key: PORT
         value: 7496
       - key: DATABASE_URL
-        sync: false  # ⚠️ On le définira manuellement dans Render Dashboard
+        sync: false
     autoDeploy: true
