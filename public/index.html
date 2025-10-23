@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulaire (Backend)</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; background:#f9fafb; padding:40px;}
+    .card{ max-width:560px; margin:auto; background:white; padding:24px; border-radius:16px; box-shadow:0 8px 30px rgba(2,6,23,.08);}
+    input,button{ padding:10px 12px; border-radius:12px; border:1px solid #e5e7eb; width:100%; }
+    label{ display:block; font-weight:600; margin:10px 0 6px; }
+    button{ background:#6d28d9; color:white; border:none; cursor:pointer; margin-top:16px; }
+    .ok{ background:#ecfeff; border:1px solid #06b6d4; color:#064e3b; padding:10px; border-radius:12px; margin-top:16px;}
+    .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Créer un patient</h2>
+    <div class="row">
+      <div>
+        <label>Nom</label>
+        <input id="nom" placeholder="Ben Ali"/>
+      </div>
+      <div>
+        <label>Prénom</label>
+        <input id="prenom" placeholder="Alya"/>
+      </div>
+    </div>
+    <label>Nombre de salles</label>
+    <input id="nbs" type="number" value="3" min="1"/>
+    <button onclick="submit()">Créer</button>
+    <div id="out"></div>
+  </div>
+  <script>
+    async function submit(){
+      const nom = document.getElementById('nom').value.trim();
+      const prenom = document.getElementById('prenom').value.trim();
+      const nombreSalles = parseInt(document.getElementById('nbs').value,10);
+      const res = await fetch('/persons', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({nom, prenom, nombreSalles})});
+      const json = await res.json();
+      const out = document.getElementById('out');
+      if(json.success){
+        out.innerHTML = `<div class='ok'>Créé ✔️ — ID: <b>${json.person.id}</b><br/>API salles: <code>/${json.person.nombreSalles}/${json.person.id}</code></div>`;
+      }else{
+        out.textContent = 'Erreur';
+      }
+    }
+  </script>
+</body>
+</html>
