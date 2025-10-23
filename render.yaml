@@ -5,7 +5,7 @@ services:
     plan: free
     region: frankfurt
     buildCommand: |
-      npm install
+      npm ci
       npm install -g @nestjs/cli
       nest build
     startCommand: node dist/main.js
