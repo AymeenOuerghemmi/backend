@@ -6,14 +6,14 @@ services:
     region: frankfurt
     buildCommand: |
       npm install
-      npm install @nestjs/cli -g
+      npm install -g @nestjs/cli
       nest build
     startCommand: node dist/main.js
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 7496
+        value: 10000
       - key: DATABASE_URL
         sync: false
     autoDeploy: true
