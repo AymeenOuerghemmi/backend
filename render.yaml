@@ -13,7 +13,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 10000
+        value: 7496
       - key: DATABASE_URL
         sync: false
     autoDeploy: true
