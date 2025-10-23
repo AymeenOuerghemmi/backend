@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: instaclinic-backend
+    name: backend
     env: node
     plan: free
     region: frankfurt
